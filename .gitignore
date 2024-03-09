@@ -45,3 +45,5 @@ bin/
 gradlew
 gradlew.bat
 settings.gradle
+/gradle/
+/.idea/
