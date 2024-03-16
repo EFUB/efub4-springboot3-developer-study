@@ -1,20 +1,20 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.0.2'
-    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.springframework.boot' version '3.0.2'  // 스프링 부트 플러그인 추가
+    id 'io.spring.dependency-management' version '1.1.0'  // 스프링의 의존성을 관리하는 spring.dependency-management 추가
 }
 
 group = 'me.hwanghyejin'
 version = '1.0'
-sourceCompatibility = '17'
+sourceCompatibility = '17'  // 자바 소스를 컴파일할 때 사용할 자바 버전 입력
 
-repositories {
+repositories {      // 의존성을 받을 저장소 지정
     mavenCentral()
 }
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+dependencies {     // 프로젝트를 개발하며 필요한 기능의 의존성을 입력
+    implementation 'org.springframework.boot:spring-boot-starter-web'    // 웹 관련 기능 제공
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'  // 테스트 기능 제공
 }
 
 test {
