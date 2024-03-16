@@ -13,8 +13,8 @@ repositories { // 의존성 받을 저장소 지정
 }
 
 dependencies { // 프로젝트 개발하며 필요한 기능의 의존성 입력
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-web' // web 스타터
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // test 스타터
 }
 
 test {
