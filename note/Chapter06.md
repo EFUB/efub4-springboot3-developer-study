@@ -42,6 +42,7 @@
   - CRUD: POST(create)/GET(read)/PUT(update)/DELETE(delete)
   - 예시: 블로그 글을 추가하는 API ```POST/articles```   
     → 이때 POST는 URL에 입력하는 값이 아니라 내부적으로 처리하는 방식을 미리 정하는 것
+<br>
 
 ## 6.2 블로그 개발을 위한 엔티티 구성하기
 
@@ -91,6 +92,7 @@
 
 ### 6.2.3 리포지터리 만들기
 - repository/BlogRepository.java 인터페이스 생성
+<br>
 
 ## 6.3 블로그 글 작성을 위한 API 구현하기
 
