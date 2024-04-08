@@ -92,7 +92,6 @@
 
 ### 6.2.3 리포지터리 만들기
 - repository/BlogRepository.java 인터페이스 생성
-<br>
 
 ## 6.3 블로그 글 작성을 위한 API 구현하기
 
@@ -183,3 +182,66 @@ class BlogApiControllerTest {
   - 역직렬화: 직렬화의 반대. 외부에서 사용하는 데이터를 자바의 객체 형태로 변환하는 작업. ex. JSON 형식의 값을 자바 객체에 맞게 변환하는 것
 
 - MockMvc 를 사용해 HTTP 메서드, URL, 요청 본문, 요청 타입 등을 설정한 뒤 설정 내용을 바탕으로 테스트 요청을 보낼 수 있다.
+
+## 6.4 블로그 글 목록 조회를 위한 API 구현하기
+
+### 6.4.1 서비스 메서드 코드 작성하기
+- JPA 지원 메서드 findAll(): 해당 테이블에 저장된 모든 데이터 조회
+
+### 6.4.2 컨트롤러 메서드 코드 작성하기
+```java
+@Getter
+public class ArticleResponse {
+    private final String title;
+    private final String content;
+
+    public ArticleResponse(Article article){
+        this.title = article.getTitle();
+        this.content = article.getContent();
+    }
+}
+```
+- <b>다른 dto 클래스와 달리 ArticleResponse 클래스의 필드에만 final 키워드가 붙는 이유</b>
+  - 요청 dto의 경우 컨트롤러에서 @RequestBody 어노테이션이 붙기 때문에 기본 생성자가 필요한데, fianl 키워드가 붙은 필드가 존재하면 기본생성자를 사용하지 못함. (기본생성자가 필요한 이유는 @RequestBody가 ObjectMapper를 사용해서 객체를 바인딩하기 때문)
+  - 응답 dto의 경우 기본 생성자를 사용할 일이 없고, 필드에 final 키워드를 붙여 재할당을 막는 것이 안전하기 때문에 final 키워드를 붙인 것으로 추정
+<br>
+
+```java
+    @GetMapping("/api/articles")
+    public ResponseEntity<List<ArticleResponse>> findAllArticles(){
+        List<ArticleResponse> articles = blogService.findAll()
+                .stream()
+                .map(ArticleResponse::new)
+                .toList();
+
+        return ResponseEntity.ok()
+                .body(articles);
+    }
+```
+- 스트림: 여러 데이터가 모여있는 컬렉션을 간편하게 처리하기 위한 자바 8에서 추가된 기능
+- ::더블콜론: 람다의 간결한 버전 중 하나. 람다식을 더욱 간결하게 해준다.  [ref](https://lucky516.tistory.com/67)
+  - `//print using lambda//`      
+    `list.forEach(item->System.out.println(item));`       
+  - `//print using :://`     
+    `list.forEach(System.out::println);`
+
+## 6.5 블로그 글 조회 API 구현하기
+
+### 6.5.1 서비스 메서드 코드 작성하기
+- JPA 지원 메서드 findById(): ID를 받아 엔티티를 조회. orElseThrow() 를 이용해 해당 엔티티가 없으면 Exception을 던지도록 구현
+
+### 6.5.2 컨트롤러 메서드 코드 작성하기
+- @PathVariable: URL에서 값을 가져오는 어노테이션
+
+## 6.6 블로그 글 삭제 API 구현하기
+
+### 6.6.1 서비스 메서드 코드 작성하기
+- JPA 지원 메서드 deleteById(): ID를 받아 데이터베이스에서 데이터 삭제
+
+## 6.7 블로그 글 수정 API 구현하기
+
+### 6.7.1 서비스 메서드 코드 작성하기
+- 엔티티 클래스에 값을 수정하는 메서드 작성
+- 서비스 메서드에서 위에서 작성한 메서드 호출
+- @Transactional: 매칭한 메서드를 하나의 트랜잭션으로 묶는 역할 → 중간에 에러가 발생해도 제대로 된 값 수정을 보장
+  - 트랜잭션: 데이터베이스의 데이터를 바꾸기 위해 묶은 작업의 단위. 중간에 실패할 시 트랜잭션의 처음 상태로 모두 되돌림을 통해 원자성 보장
