@@ -44,13 +44,13 @@ public class WecSecurityConfig {
                 .formLogin() // 폼 기반 로그인 설정
                 // loginPage() : 로그인 페이지 경로를 설정함.
                 // defaultSuccessUrl() : 로그인이 완료되었을 때 이동할 경로를 설정함.
-                .loginPage("/login")
+               // .loginPage("/login")
                 .defaultSuccessUrl("/articles")
                 .and()
                 .logout() // 로그아웃 설정
                 // logoutSuccessUrl() : 로그아웃이 완료되었을 때 이동할 경로를 설정함.
                 // invalidateHttpSession() : 로그아웃 이후에 세션을 전체 삭제할지 여부를 설정함.
-                .logoutSuccessUrl("/login")
+                //.logoutSuccessUrl("/login")
                 .invalidateHttpSession(true)
                 .and()
                 .csrf().disable() // csrf 비뢀성화 : CSRF 공격을 방지하기 위해 활성화하는 것이 좋지만 실습을 위해 비활성화함.
