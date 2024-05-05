@@ -1,7 +1,7 @@
 package me.yeojinLee.springbootdeveloper.service;
 
 import lombok.RequiredArgsConstructor;
-import me.yeojinLee.springbootdeveloper.BlogRepository;
+import me.yeojinLee.springbootdeveloper.repository.BlogRepository;
 import me.yeojinLee.springbootdeveloper.domain.Article;
 import me.yeojinLee.springbootdeveloper.dto.AddArticleRequest;
 import me.yeojinLee.springbootdeveloper.dto.UpdateArticleRequest;
