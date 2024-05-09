@@ -13,3 +13,7 @@ spring:
     console:
       enabled: true
 
+jwt:
+  issuer : ahtnwl1004@gmail.com
+  secret_key: study-springboot
+
