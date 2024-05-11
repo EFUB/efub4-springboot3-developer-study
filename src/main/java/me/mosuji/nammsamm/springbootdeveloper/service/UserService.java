@@ -29,4 +29,9 @@ public class UserService {
         return userRepository.findById(userId)
                 .orElseThrow(()-> new IllegalArgumentException("잘못된 id 입니다."));
     }
+
+    public User findById(Long userId){
+        return userRepository.findById(userId)
+                .orElseThrow(()->new IllegalArgumentException("Unexpected user"));
+    }
 }
