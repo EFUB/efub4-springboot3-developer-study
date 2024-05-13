@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="me.sonminseo.springbootdeveloper.controller.TokenApiControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-13T18:27:26" hostname="MacBook-Pro.local" time="0.201">
+  <properties/>
+  <testcase name="createNewAccessToken: 새로운 액세스 토큰을 발급한다." classname="me.sonminseo.springbootdeveloper.controller.TokenApiControllerTest" time="0.201"/>
+  <system-out><![CDATA[03:27:24.468 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [TokenApiControllerTest]: using SpringBootContextLoader
+03:27:24.470 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [me.sonminseo.springbootdeveloper.controller.TokenApiControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+03:27:24.471 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [me.sonminseo.springbootdeveloper.controller.TokenApiControllerTest]: TokenApiControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+03:27:24.483 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using ContextCustomizers for test class [TokenApiControllerTest]: [DisableObservabilityContextCustomizer, PropertyMappingContextCustomizer, Customizer, ImportsContextCustomizer, ExcludeFilterContextCustomizer, DuplicateJsonObjectContextCustomizer, MockitoContextCustomizer, TestRestTemplateContextCustomizer]
+03:27:24.517 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [/Users/sonminseo/IdeaProjects/springboot-developer/build/classes/java/main/me/sonminseo/springbootdeveloper/SpringBootDeveloperApplication.class]
+03:27:24.518 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration me.sonminseo.springbootdeveloper.SpringBootDeveloperApplication for test class me.sonminseo.springbootdeveloper.controller.TokenApiControllerTest
+03:27:24.551 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners for test class [TokenApiControllerTest]: [ServletTestExecutionListener, DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, MockitoTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, TransactionalTestExecutionListener, SqlScriptsTestExecutionListener, EventPublishingTestExecutionListener, RestDocsTestExecutionListener, MockRestServiceServerResetTestExecutionListener, MockMvcPrintOnlyOnFailureTestExecutionListener, WebDriverTestExecutionListener, MockWebServiceServerTestExecutionListener, ResetMocksTestExecutionListener]
+03:27:24.551 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: class [TokenApiControllerTest], class annotated with @DirtiesContext [false] with mode [null]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.0.2)
+
+2024-05-14T03:27:24.673+09:00  INFO 88234 --- [    Test worker] m.s.s.controller.TokenApiControllerTest  : Starting TokenApiControllerTest using Java 17.0.10 with PID 88234 (started by sonminseo in /Users/sonminseo/IdeaProjects/springboot-developer)
+2024-05-14T03:27:24.673+09:00  INFO 88234 --- [    Test worker] m.s.s.controller.TokenApiControllerTest  : No active profile set, falling back to 1 default profile: "default"
+2024-05-14T03:27:24.922+09:00  INFO 88234 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-14T03:27:24.945+09:00  INFO 88234 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 3 JPA repository interfaces.
+2024-05-14T03:27:25.112+09:00  INFO 88234 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-14T03:27:25.187+09:00  INFO 88234 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2024-05-14T03:27:25.187+09:00  INFO 88234 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-14T03:27:25.208+09:00  INFO 88234 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-05-14T03:27:25.230+09:00  INFO 88234 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
+2024-05-14T03:27:25.293+09:00  WARN 88234 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2024-05-14T03:27:25.350+09:00  INFO 88234 --- [    Test worker] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: 
+    
+    drop table if exists article cascade 
+Hibernate: 
+    
+    drop table if exists refresh_token cascade 
+Hibernate: 
+    
+    drop table if exists users cascade 
+Hibernate: 
+    
+    create table article (
+       id bigint generated by default as identity,
+        content varchar(255) not null,
+        title varchar(255) not null,
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table refresh_token (
+       id bigint generated by default as identity,
+        refresh_token varchar(255) not null,
+        user_id bigint not null,
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table users (
+       id bigint generated by default as identity,
+        email varchar(255) not null,
+        password varchar(255) not null,
+        primary key (id)
+    )
+Hibernate: 
+    
+    alter table if exists refresh_token 
+       add constraint UK_f95ixxe7pa48ryn1awmh2evt7 unique (user_id)
+Hibernate: 
+    
+    alter table if exists users 
+       add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
+2024-05-14T03:27:25.632+09:00  INFO 88234 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-05-14T03:27:25.636+09:00  INFO 88234 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-14T03:27:25.800+09:00  WARN 88234 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-14T03:27:25.936+09:00  INFO 88234 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@71e55e48, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@36696821, org.springframework.security.web.context.SecurityContextHolderFilter@1f5f4d48, org.springframework.security.web.header.HeaderWriterFilter@2f03fdc0, org.springframework.security.web.authentication.logout.LogoutFilter@779136bf, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4d7fba20, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2c8e096, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3dabdd11, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5f01361e, org.springframework.security.web.access.ExceptionTranslationFilter@1fce6eb4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@106b476a]
+2024-05-14T03:27:26.033+09:00  INFO 88234 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2024-05-14T03:27:26.050+09:00  WARN 88234 --- [    Test worker] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore org.springframework.boot.autoconfigure.security.servlet.PathRequest$H2ConsoleRequestMatcher@24d7c365. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2024-05-14T03:27:26.050+09:00  INFO 88234 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will not secure org.springframework.boot.autoconfigure.security.servlet.PathRequest$H2ConsoleRequestMatcher@24d7c365
+2024-05-14T03:27:26.050+09:00  WARN 88234 --- [    Test worker] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Mvc [pattern='/static/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2024-05-14T03:27:26.050+09:00  INFO 88234 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Mvc [pattern='/static/**']
+2024-05-14T03:27:26.063+09:00  INFO 88234 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-05-14T03:27:26.063+09:00  INFO 88234 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-05-14T03:27:26.064+09:00  INFO 88234 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2024-05-14T03:27:26.078+09:00  INFO 88234 --- [    Test worker] m.s.s.controller.TokenApiControllerTest  : Started TokenApiControllerTest in 1.508 seconds (process running for 1.931)
+2024-05-14T03:27:26.143+09:00  INFO 88234 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2024-05-14T03:27:26.143+09:00  INFO 88234 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2024-05-14T03:27:26.143+09:00  INFO 88234 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password 
+    from
+        users u1_0
+Hibernate: 
+    insert 
+    into
+        users
+        (id, email, password) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    insert 
+    into
+        refresh_token
+        (id, refresh_token, user_id) 
+    values
+        (default, ?, ?)
+Hibernate: 
+    select
+        r1_0.id,
+        r1_0.refresh_token,
+        r1_0.user_id 
+    from
+        refresh_token r1_0 
+    where
+        r1_0.refresh_token=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.email,
+        u1_0.password 
+    from
+        users u1_0 
+    where
+        u1_0.id=?
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
