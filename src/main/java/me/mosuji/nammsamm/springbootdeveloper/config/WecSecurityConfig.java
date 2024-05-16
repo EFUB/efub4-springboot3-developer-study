@@ -1,22 +1,32 @@
 package me.mosuji.nammsamm.springbootdeveloper.config;
 
 import lombok.RequiredArgsConstructor;
+import me.mosuji.nammsamm.springbootdeveloper.config.jwt.TokenProvider;
+import me.mosuji.nammsamm.springbootdeveloper.config.oauth.OAuth2UserCustomService;
+import me.mosuji.nammsamm.springbootdeveloper.repository.RefreshTokenRepository;
 import me.mosuji.nammsamm.springbootdeveloper.service.UserDetailService;
+import me.mosuji.nammsamm.springbootdeveloper.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
+
 
 @Configuration
 @RequiredArgsConstructor
 public class WecSecurityConfig {
-
+/*
     private final UserDetailService userService;
 
     // 스프링 시큐리티 기능 비활성화 :   인증, 인가 서비스를 모든 곳에 적용하지는 않음. 일반적으로 리소스 파일에 설정함.
@@ -78,4 +88,15 @@ public class WecSecurityConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+ */
 }
+
+
+
+
+
+
+
+
+
