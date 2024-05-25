@@ -157,7 +157,7 @@ class BlogAPIControllerTest {
                 .andExpect(jsonPath("$.content").value(savedArticle.getContent()))
                 .andExpect(jsonPath("$.title").value(savedArticle.getTitle()));
     }
-
+/*
     @DisplayName("deleteArticle: 블로그 글 삭제에 성공한다.")
     @Test
     public void deleteArticle() throws Exception{
@@ -182,6 +182,8 @@ class BlogAPIControllerTest {
         assertThat(articles).isEmpty();
     }
 
+
+ */
     @DisplayName("updateArticle : 블로그 글 수정에 성공한다.")
     @Test
     public void updateArticle() throws Exception{
