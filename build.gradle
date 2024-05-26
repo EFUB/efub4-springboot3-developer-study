@@ -33,6 +33,8 @@ dependencies {   // 프로젝트를 개발하며 필요한 기능의 의존성�
     implementation 'javax.xml.bind:jaxb-api:2.3.1' // XML 문서와 Java 객체 간 매핑 자동화
     // OAuth2를 사용하기 위한 스타터 추가
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    implementation 'mysql:mysql-connector-java'
 }
 
 test {
