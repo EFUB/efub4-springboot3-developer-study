@@ -16,18 +16,3 @@ spring:
   h2:  # H2 콘솔 활성화
     console:
       enabled: true
-
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: #클라이언트 ID
-            client-secret: #클라이언트 보안 비밀번호
-            scope:
-              - email
-              - profile
-
-jwt:
-  issuer: ajufresh@gmail.com   # 이슈 발급자 설정
-  secret_key: study-springboot  # 비밀키 설정
