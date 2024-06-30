@@ -27,12 +27,11 @@ public class TokenProvider {
         return makeToken(new Date(now.getTime() + expiredAt.toMillis()), user);
     }
 
-    /* JWT 토큰 생성 메서드 */
     private String makeToken(Date expiry, User user) {
         Date now = new Date();
 
         return Jwts.builder()
-                .setHeaderParam(Header.TYPE, Header.JWT_TYPE) // 헤더 타입 JWT
+                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setIssuer(jwtProperties.getIssuer())
                 .setIssuedAt(now)
                 .setExpiration(expiry)
@@ -42,7 +41,6 @@ public class TokenProvider {
                 .compact();
     }
 
-    /* JWT 토큰 유효성 검증 메서드 */
     public boolean validToken(String token) {
         try {
             Jwts.parser()
@@ -55,16 +53,15 @@ public class TokenProvider {
         }
     }
 
-    /* 토큰 기반으로 인증 정보를 가져오는 메서드 */
+
     public Authentication getAuthentication(String token) {
         Claims claims = getClaims(token);
-        Set<SimpleGrantedAuthority> authorities = Collections.singleton(new SimpleGrantedAuthority("ROLe_USER"));
+        Set<SimpleGrantedAuthority> authorities = Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
 
-        return new UsernamePasswordAuthenticationToken(new org.springframework.security.core.userdetails.User(claims.getSubject(),
-                "", authorities), token, authorities);
+        return new UsernamePasswordAuthenticationToken(new org.springframework.security.core.userdetails.User(claims.getSubject
+                (), "", authorities), token, authorities);
     }
 
-    /* 토큰 기반으로 유저 ID를 가져오는 메서드 */
     public Long getUserId(String token) {
         Claims claims = getClaims(token);
         return claims.get("id", Long.class);

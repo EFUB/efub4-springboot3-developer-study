@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.client.OAuth2AuthorizationSuccessHandler;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -31,7 +30,6 @@ public class WebOAuthSecurityConfig {
     private final RefreshTokenRepository refreshTokenRepository;
     private final UserService userService;
 
-    // 시큐리티 기능 비활성화
     @Bean
     public WebSecurityCustomizer configure() {
         return (web) -> web.ignoring()
@@ -41,7 +39,6 @@ public class WebOAuthSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        // 기존에 사용하던 폼로그인, 세션 비활성화
         http.csrf().disable()
                 .httpBasic().disable()
                 .formLogin().disable()
@@ -50,10 +47,9 @@ public class WebOAuthSecurityConfig {
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        //  헤더 확인할 커스텀 필터 추가
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
-        // 토큰 재발급 URL은 인증 없이 접근 가능하도록 설정,나머지 API URL은 인증 필요
+
         http.authorizeRequests()
                 .requestMatchers("/api/token").permitAll()
                 .requestMatchers("/api/**").authenticated()
@@ -62,10 +58,9 @@ public class WebOAuthSecurityConfig {
         http.oauth2Login()
                 .loginPage("/login")
                 .authorizationEndpoint()
-                // Authorization 요청과 관련된 상태 저장
                 .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository())
                 .and()
-                .successHandler(oAuth2SuccessHandler()) // 인증 성공시 실행할 핸들러
+                .successHandler(oAuth2SuccessHandler())
                 .userInfoEndpoint()
                 .userService(oAuth2UserCustomService);
 

@@ -1,6 +1,5 @@
 package me.crHwang0822.springbootdeveloper.dto;
 
-
 import lombok.Getter;
 import me.crHwang0822.springbootdeveloper.domain.Article;
 
