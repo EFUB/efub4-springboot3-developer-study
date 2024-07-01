@@ -40,3 +40,7 @@ dependencies {   // 프로젝트를 개발하며 필요한 기능의 의존성�
 test {
     useJUnitPlatform()
 }
+
+jar {
+    enabled = false
+}
