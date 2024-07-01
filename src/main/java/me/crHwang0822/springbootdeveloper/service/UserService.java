@@ -4,9 +4,6 @@ import lombok.RequiredArgsConstructor;
 import me.crHwang0822.springbootdeveloper.domain.User;
 import me.crHwang0822.springbootdeveloper.dto.AddUserRequest;
 import me.crHwang0822.springbootdeveloper.repository.UserRepository;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +13,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public Long save(AddUserRequest dto){
-
+    public Long save(AddUserRequest dto) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         return userRepository.save(User.builder()
@@ -26,14 +22,13 @@ public class UserService {
                 .build()).getId();
     }
 
-    public User findById(Long userId){
+    public User findById(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(()-> new IllegalArgumentException("Unexpected user"));
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
     }
 
-    //메서드 추가
-    public User findByEmail(String email){
+    public User findByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(()-> new IllegalArgumentException("Unexpected user"));
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
     }
 }
